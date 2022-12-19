@@ -14,7 +14,7 @@ sbt run
 
 **Api Requests**
 
-Issue request with latitude and longitude as a query param to recieve general forecast
+Issue request with latitude and longitude as a query param to receive general forecast
 ```bash
 localhost:8080/weather?latitude=30.3087&longitude=-97.6981
 ```
