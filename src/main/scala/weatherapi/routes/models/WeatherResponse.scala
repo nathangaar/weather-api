@@ -12,9 +12,9 @@ object WeatherResponse {
 
   def apply(shortForecast: ShortForecast, temperature: Temperature): WeatherResponse = {
     val temp = temperature match {
-      case t if t < 40           => "cold"
-      case t if t > 40 && t < 80 => "moderate"
-      case t if t > 80           => "warm"
+      case t if t < 40             => "cold"
+      case t if t >= 40 && t <= 80 => "moderate"
+      case t if t > 80             => "warm"
     }
     WeatherResponse(shortForecast, temp)
   }
