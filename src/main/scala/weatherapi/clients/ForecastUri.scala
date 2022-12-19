@@ -6,7 +6,7 @@ import org.http4s.Uri.unsafeFromString
 
 final case class ForecastUri(uri: Uri)
 
-object ForcecastUri {
+object ForecastUri {
 
   implicit val encodeForeCastsUri: Decoder[ForecastUri] = new Decoder[ForecastUri] {
     final def apply(c: HCursor): Decoder.Result[ForecastUri] =

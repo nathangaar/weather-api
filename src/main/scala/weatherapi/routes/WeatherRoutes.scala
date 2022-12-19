@@ -16,7 +16,7 @@ import weatherapi.domain.{Latitude, Longitude}
 import weatherapi.routes.models.WeatherResponse
 import weatherapi.routes.models.WeatherResponse._
 import weatherapi.validation.Errors.DomainErrors
-import weatherapi.validation.GeoPointsValidator
+import weatherapi.validation.CoordinatesValidator
 
 object WeatherRoutes {
 
@@ -32,10 +32,10 @@ object WeatherRoutes {
       case _ @GET -> Root / "weather" :? LatitudeQueryParamMatcher(latitude) +& LongitudeQueryParamMatcher(longitude) =>
         // Typically wouldn't make these routes heavy with business-esque logic
         (for {
-          geoPoints <- fromEither[IO](
-            GeoPointsValidator.validate(latitude, longitude).toEither.leftMap(err => DomainErrors(err.toList))
+          coord <- fromEither[IO](
+            CoordinatesValidator.validate(latitude, longitude).toEither.leftMap(err => DomainErrors(err.toList))
           )
-          forecastUri <- EitherT(Client.forecastUri(geoPoints.latitude, geoPoints.longitude))
+          forecastUri <- EitherT(Client.forecastUri(coord.latitude, coord.longitude))
           forecasts <- EitherT(Client.forecasts(forecastUri.uri))
           // Ensure forecasts are sorted by indice and pluck head
           primaryForecast = forecasts.summaries.sortBy(_.index).head
@@ -53,6 +53,7 @@ object WeatherRoutes {
             r => Ok(r.asJson),
           )
           .handleErrorWith { err =>
+            println(err)
             InternalServerError(err.getMessage)
           }
     }

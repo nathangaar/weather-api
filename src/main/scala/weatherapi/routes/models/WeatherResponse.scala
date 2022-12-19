@@ -7,6 +7,7 @@ final case class WeatherResponse(
     shortForecast: ShortForecast,
     temp: String,
 )
+
 object WeatherResponse {
 
   def apply(shortForecast: ShortForecast, temperature: Temperature): WeatherResponse = {

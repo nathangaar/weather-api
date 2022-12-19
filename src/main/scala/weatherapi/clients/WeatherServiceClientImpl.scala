@@ -15,11 +15,10 @@ class WeatherServiceClientImpl(
     httpClient: Resource[IO, Client[IO]] = EmberClientBuilder.default[IO].build
 ) extends WeatherServiceClient {
   import Forecasts._
-  import ForcecastUri._
+  import ForecastUri._
 
   val UserAgent = Header.Raw(ci"User-Agent", "ndt")
 
-  // Retrieve forcecast uri
   override def forecastUri(latitude: Latitude, longitude: Longitude): IO[Either[Throwable, ForecastUri]] = {
     val request = GET(
       uri"https://api.weather.gov"

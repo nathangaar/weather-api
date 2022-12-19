@@ -36,8 +36,8 @@ object Dependencies {
   )
 
   lazy val Tests = Seq(
-    "org.scalatest" %% "scalatest" % "3.2.9" % Test,
-    "org.scalamock" %% "scalamock" % "5.1.0" % Test,
+    "org.scalatest" %% "scalatest" % "3.2.14" % Test,
+    "org.scalatestplus" %% "mockito-4-6" % "3.2.14.0" % Test,
   )
 
   val Libraries =
