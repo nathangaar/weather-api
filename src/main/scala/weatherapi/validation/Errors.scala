@@ -8,7 +8,7 @@ object Errors {
   sealed abstract class DomainValidation extends NoStackTrace { def errorMessage: String }
 
   final case object LatitudeInvalid extends DomainValidation {
-    val errorMessage: String = "Latitute must be between -90.0 and 90.0"
+    val errorMessage: String = "Latitude must be between -90.0 and 90.0"
   }
 
   final case object LongitudeInvalid extends DomainValidation {
